@@ -97,6 +97,23 @@ services:
     depends_on:
       - authentication_db
 
+	#Mediun-excuses
+
+  sa_excuses_ms:
+    build: .
+    command: python -u /home/ExcuseResource.py
+    ports:
+      - "5006:5006"
+    #entrypoint: /bin/sh
+    stdin_open: true
+    tty: true
+    links:
+      - sa_excuses_db:network_excuses
+  sa_excuses_db:
+    image: "sa-excuses-db"
+    ports:
+      - "6006:27017"
+
 	#API-Gateway usando GraphQL
     mediun_api:
     	build: .
